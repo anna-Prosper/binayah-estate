@@ -1,0 +1,10 @@
+{
+  "name": "binayah-estate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Binayah Estate — Dubai property alerts landing page with subscription capture",
+  "dependencies": {
+    "mongodb": "^6.12.0"
+  }
+}
