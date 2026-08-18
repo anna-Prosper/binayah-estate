@@ -23,8 +23,22 @@
   body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; }
   @media only screen and (max-width: 620px) {
     .wrapper { width: 100% !important; }
-    .stack { display: block !important; width: 100% !important; }
+    .stack { display: block !important; width: 100% !important; box-sizing: border-box !important; }
+    /* stacked bordered cards need their own vertical gap */
+    .stack-card { margin-bottom: 12px !important; }
+    .stack-card-last { margin-bottom: 0 !important; }
+    /* horizontal spacer columns are meaningless once stacked */
+    .spacer-col { display: none !important; width: 0 !important; height: 0 !important; }
+    .amen { display: inline-block !important; width: 50% !important; box-sizing: border-box !important; padding: 10px 6px !important; vertical-align: top !important; }
+    .pay-divider { border-left: 0 !important; border-right: 0 !important; border-top: 1px solid #e3ded2 !important; border-bottom: 1px solid #e3ded2 !important; }
     .pad-mobile { padding-left: 24px !important; padding-right: 24px !important; }
+    /* tighten oversized desktop type/padding on small screens */
+    .h-brand { font-size: 34px !important; letter-spacing: 5px !important; line-height: 38px !important; }
+    .stat-value { font-size: 21px !important; line-height: 26px !important; }
+    .pay-value { font-size: 19px !important; line-height: 24px !important; }
+    .cta-link { display: block !important; padding: 15px 20px !important; }
+    .cta-wrap { width: 100% !important; }
+    .pad-tight { padding-top: 26px !important; padding-bottom: 26px !important; }
   }
 </style>
 </head>
@@ -72,7 +86,7 @@ New Release
 <tr>
 <td align="center" style="padding:44px 44px 2px 44px;" class="pad-mobile">
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:3px; color:#9a978c; text-transform:uppercase; padding-bottom:14px;">Binghatti Presents</div>
-<div style="font-family:Georgia, 'Times New Roman', serif; font-size:44px; letter-spacing:8px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; mso-line-height-rule:exactly; line-height:48px;">SKYFLAME</div>
+<div style="font-family:Georgia, 'Times New Roman', serif; font-size:44px; letter-spacing:8px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; mso-line-height-rule:exactly; line-height:48px;" class="h-brand">SKYFLAME</div>
 </td>
 </tr>
 <tr>
@@ -97,15 +111,15 @@ Resort-style waterfront living in a landmark tower — now available with a limi
 <td style="padding:0 44px 32px 44px;" class="pad-mobile">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tbody><tr>
-<td width="50%" class="stack" align="center" valign="top" style="border:1px solid #e3ded2; padding:22px 10px;">
+<td width="50%" class="stack stack-card" align="center" valign="top" style="border:1px solid #e3ded2; padding:22px 10px;">
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; color:#9a978c; text-transform:uppercase; mso-line-height-rule:exactly; line-height:16px;">Starting Price From</div>
-<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding-top:8px; mso-line-height-rule:exactly; line-height:28px;">AED 1,050,000</div>
+<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding-top:8px; mso-line-height-rule:exactly; line-height:28px;" class="stat-value">AED 1,050,000</div>
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#9a978c; padding-top:4px;">(approx. USD 286,000)</div>
 </td>
-<td width="14" style="font-size:0; line-height:0;">&nbsp;</td>
-<td width="50%" class="stack" align="center" valign="top" style="border:1px solid #e3ded2; padding:22px 10px;">
+<td class="spacer-col" width="14" style="font-size:0; line-height:0;">&nbsp;</td>
+<td width="50%" class="stack stack-card stack-card-last" align="center" valign="top" style="border:1px solid #e3ded2; padding:22px 10px;">
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; color:#9a978c; text-transform:uppercase; mso-line-height-rule:exactly; line-height:16px;">Size Up To</div>
-<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#1c1a17; padding-top:8px; mso-line-height-rule:exactly; line-height:28px;">800 SQ FT</div>
+<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#1c1a17; padding-top:8px; mso-line-height-rule:exactly; line-height:28px;" class="stat-value">800 SQ FT</div>
 </td>
 </tr>
 </tbody></table>
@@ -115,10 +129,10 @@ Resort-style waterfront living in a landmark tower — now available with a limi
 <!-- CTA -->
 <tr>
 <td align="center" style="padding:0 44px 48px 44px;" class="pad-mobile">
-<table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<table role="presentation" class="cta-wrap" cellpadding="0" cellspacing="0" border="0">
 <tbody><tr>
 <td align="center" bgcolor="#c9a769" style="background-color:#c9a769; background-image:linear-gradient(135deg, #f2dca0 0%, #c9a769 50%, #8a6a34 100%); border-radius:2px;">
-<a target="_blank" rel="noopener" href="https://wa.me/971549988811?text=Hi%20Binayah%2C%20I%27m%20interested%20in%20the%201%20Bedroom%20at%20SkyFlame%20by%20Binghatti%20%28from%20AED%201%2C050%2C000%29.%20Please%20send%20me%20more%20details." style="display:block; padding:14px 48px; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; color:#ffffff; text-decoration:none; border-radius:2px;">ENQUIRE NOW</a>
+<a class="cta-link" target="_blank" rel="noopener" href="https://wa.me/971549988811?text=Hi%20Binayah%2C%20I%27m%20interested%20in%20the%201%20Bedroom%20at%20SkyFlame%20by%20Binghatti%20%28from%20AED%201%2C050%2C000%29.%20Please%20send%20me%20more%20details." style="display:block; padding:14px 48px; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; color:#ffffff; text-decoration:none; border-radius:2px;">ENQUIRE NOW</a>
 </td>
 </tr>
 </tbody></table>
@@ -151,7 +165,7 @@ Resort-style waterfront living in a landmark tower — now available with a limi
 <div style="font-size:11px; color:#9a978c; padding-top:2px;">AED 210,000</div>
 <div style="font-size:10px; letter-spacing:1px; color:#9a978c; padding-top:6px; text-transform:uppercase;">Down Payment</div>
 </td>
-<td width="33%" class="stack" align="center" style="font-family:Arial, Helvetica, sans-serif; color:#1c1a17; border-left:1px solid #e3ded2; border-right:1px solid #e3ded2;">
+<td width="33%" class="stack pay-divider" align="center" style="font-family:Arial, Helvetica, sans-serif; color:#1c1a17; border-left:1px solid #e3ded2; border-right:1px solid #e3ded2;">
 <div style="font-size:19px; font-weight:bold;">20%</div>
 <div style="font-size:11px; color:#9a978c; padding-top:2px;">AED 210,000</div>
 <div style="font-size:10px; letter-spacing:1px; color:#9a978c; padding-top:6px; text-transform:uppercase;">During Construction</div>
@@ -174,14 +188,14 @@ Resort-style waterfront living in a landmark tower — now available with a limi
 <td style="padding:40px 44px 8px 44px;" class="pad-mobile">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tbody><tr>
-<td width="50%" class="stack" align="center" valign="middle" style="border:1px solid #e3ded2; padding:24px 10px;">
+<td width="50%" class="stack stack-card" align="center" valign="middle" style="border:1px solid #e3ded2; padding:24px 10px;">
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; color:#9a978c; text-transform:uppercase; padding-bottom:8px;">Limited Offer</div>
-<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">4% DLD Waiver</div>
+<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#a9822e; background-image:linear-gradient(135deg, #e8c98a 0%, #b0863a 45%, #6e4f1c 75%, #d9b76e 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;" class="stat-value">4% DLD Waiver</div>
 </td>
-<td width="14" style="font-size:0; line-height:0;">&nbsp;</td>
-<td width="50%" class="stack" align="center" valign="middle" style="border:1px solid #e3ded2; padding:24px 10px;">
+<td class="spacer-col" width="14" style="font-size:0; line-height:0;">&nbsp;</td>
+<td width="50%" class="stack stack-card stack-card-last" align="center" valign="middle" style="border:1px solid #e3ded2; padding:24px 10px;">
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; color:#9a978c; text-transform:uppercase; padding-bottom:8px;">Cash Price</div>
-<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#1c1a17;">AED 950,000</div>
+<div style="font-family:Georgia, 'Times New Roman', serif; font-size:24px; color:#1c1a17;" class="stat-value">AED 950,000</div>
 <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#9a978c; padding-top:4px;">(approx. USD 259,000)</div>
 </td>
 </tr>
@@ -194,19 +208,19 @@ Resort-style waterfront living in a landmark tower — now available with a limi
 <td style="padding:40px 44px 44px 44px;" class="pad-mobile">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tbody><tr>
-<td width="25%" class="stack" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
+<td width="25%" class="amen" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
 Prime<br>Location
 </td>
-<td width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
-<td width="25%" class="stack" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
+<td class="spacer-col" width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
+<td width="25%" class="amen" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
 Modern<br>Architecture
 </td>
-<td width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
-<td width="25%" class="stack" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
+<td class="spacer-col" width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
+<td width="25%" class="amen" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
 Resort Style<br>Amenities
 </td>
-<td width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
-<td width="25%" class="stack" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
+<td class="spacer-col" width="1" bgcolor="#e3ded2" style="font-size:0; line-height:0;">&nbsp;</td>
+<td width="25%" class="amen" align="center" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:0.5px; color:#5c5a52; text-transform:uppercase; line-height:15px; padding:0 6px;">
 Luxury<br>Living
 </td>
 </tr>
