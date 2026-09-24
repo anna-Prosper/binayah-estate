@@ -241,6 +241,7 @@
         <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="field-row">
           <input type="email" name="email" inputmode="email" autocomplete="email" placeholder="Your email address" required aria-label="Email address" />
+          <input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="Phone number" required aria-label="Phone number" />
           <input type="text" name="name" autocomplete="given-name" placeholder="First name (optional)" aria-label="First name" />
           <button class="btn-sub" type="submit">Subscribe</button>
         </div>
@@ -325,6 +326,27 @@
   </footer>
 
   <script>
+    // Phone rules mirror the shared Binayah validator: strict about UAE numbers
+    // (the format is unambiguous), permissive about everything else.
+    function uaeNationalOk(n) {
+      if (n.length === 9) return n.charAt(0) === "5";
+      if (n.length === 8) return /^[234679]/.test(n);
+      return false;
+    }
+    function phoneOk(raw) {
+      raw = String(raw || "").trim();
+      if (!raw) return false;
+      if (/[a-z]/i.test(raw)) return false;
+      var digits = raw.replace(/\D/g, "");
+      if (digits.length < 7 || digits.length > 15) return false;
+      if (raw.charAt(0) === "0" && raw.slice(0, 2) !== "00") {
+        return uaeNationalOk(digits.replace(/^0/, ""));
+      }
+      var d = digits.replace(/^00/, "");
+      if (d.slice(0, 3) === "971") return uaeNationalOk(d.slice(3));
+      return true;
+    }
+
     (function () {
       var form = document.getElementById("subForm");
       var msg = form.querySelector(".form-msg");
@@ -335,6 +357,7 @@
         msg.textContent = "";
         var data = {
           email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
           name: form.name.value.trim(),
           company: form.company.value // honeypot
         };
@@ -342,6 +365,12 @@
           msg.className = "form-msg err";
           msg.textContent = "Please enter a valid email address.";
           form.email.focus();
+          return;
+        }
+        if (!phoneOk(data.phone)) {
+          msg.className = "form-msg err";
+          msg.textContent = "Please enter a valid phone number.";
+          form.phone.focus();
           return;
         }
         btn.disabled = true;

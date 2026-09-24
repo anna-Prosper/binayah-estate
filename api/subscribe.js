@@ -38,6 +38,24 @@ function fieldHash(value) {
   return createHmac("sha256", HMAC).update(String(value).toLowerCase().trim()).digest("hex");
 }
 
+// ── phone validation (mirror of binayah-api src/lib/phone-validate.ts) ───────
+function uaeNationalOk(n) {
+  if (n.length === 9) return n.startsWith("5");
+  if (n.length === 8) return /^[234679]/.test(n);
+  return false;
+}
+function phoneOk(raw) {
+  raw = String(raw || "").trim();
+  if (!raw) return false;
+  if (/[a-z]/i.test(raw)) return false;
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length < 7 || digits.length > 15) return false;
+  if (raw.startsWith("0") && !raw.startsWith("00")) return uaeNationalOk(digits.replace(/^0/, ""));
+  const d = digits.replace(/^00/, "");
+  if (d.startsWith("971")) return uaeNationalOk(d.slice(3));
+  return true;
+}
+
 // ── cached Mongo connection (survives warm invocations) ──────────────────────
 let clientPromise;
 function getClient() {
@@ -79,6 +97,12 @@ export default async function handler(req, res) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!emailOk) return res.status(400).json({ ok: false, error: "A valid email is required." });
+
+  // Phone is mandatory across every Binayah lead form. Enforced here as well as
+  // in the page, since the client check is only a courtesy.
+  if (!phoneOk(phoneRaw)) {
+    return res.status(400).json({ ok: false, error: "A valid phone number is required." });
+  }
 
   // Honeypot: bots fill hidden fields. Accept silently, store nothing.
   if (honeypot) return res.status(200).json({ ok: true, already: false });
